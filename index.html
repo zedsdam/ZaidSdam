@@ -3,25 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شبكة ملازمنا</title>
+    <title>لوحة التحكم</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>شبكة ملازمنا</h1>
-        <input type="text" id="search" placeholder="بحث عن ملازم أو كتب...">
-    </header>
-    <main>
-        <section id="grades">
-            <div class="grade" onclick="showMaterials('الصف الأول متوسط')">الصف الأول متوسط</div>
-            <div class="grade" onclick="showMaterials('الصف الثاني متوسط')">الصف الثاني متوسط</div>
-            <div class="grade" onclick="showMaterials('الصف الثالث متوسط')">الصف الثالث متوسط</div>
-            <!-- أضف الصفوف الأخرى هنا -->
+    <div class="sidebar">
+        <h2>لوحة التحكم</h2>
+        <ul>
+            <li><a href="#dashboard" onclick="showSection('dashboard')">اللوحة الرئيسية</a></li>
+            <li><a href="#add-material" onclick="showSection('add-material')">إضافة مادة</a></li>
+            <li><a href="#manage-materials" onclick="showSection('manage-materials')">إدارة الملازم</a></li>
+            <li><a href="#logout" onclick="logout()">تسجيل الخروج</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>اللوحة الرئيسية</h1>
+        </header>
+        <section id="dashboard">
+            <h2>مرحبا بك في لوحة التحكم!</h2>
+            <p>هنا يمكنك إدارة المحتوى الخاص بموقعك.</p>
         </section>
-        <section id="materials">
-            <!-- ستُعرض الملازم والكتب هنا بناءً على الصف المختار -->
+        <section id="add-material" style="display: none;">
+            <h2>إضافة مادة جديدة</h2>
+            <input type="text" id="material-title" placeholder="عنوان المادة" required>
+            <input type="text" id="material-link" placeholder="رابط التحميل" required>
+            <button onclick="addMaterial()">إضافة</button>
         </section>
-    </main>
+        <section id="manage-materials" style="display: none;">
+            <h2>إدارة الملازم</h2>
+            <div id="materials-list"></div>
+        </section>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
