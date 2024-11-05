@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شبكة ملازمنا</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>شبكة ملازمنا</h1>
+        <input type="text" id="search" placeholder="بحث عن ملازم أو كتب...">
+    </header>
+    <main>
+        <section id="grades">
+            <div class="grade" onclick="showMaterials('الصف الأول متوسط')">الصف الأول متوسط</div>
+            <div class="grade" onclick="showMaterials('الصف الثاني متوسط')">الصف الثاني متوسط</div>
+            <div class="grade" onclick="showMaterials('الصف الثالث متوسط')">الصف الثالث متوسط</div>
+            <!-- أضف الصفوف الأخرى هنا -->
+        </section>
+        <section id="materials">
+            <!-- ستُعرض الملازم والكتب هنا بناءً على الصف المختار -->
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
