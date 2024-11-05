@@ -1,42 +1,44 @@
-// بيانات تجريبية - يمكن استبدالها بروابط حقيقية للكتب أو الملازم
-const materialsData = {
-    'الصف الأول متوسط': [
-        { title: 'مادة الرياضيات', link: 'https://example.com/math' },
-        { title: 'مادة العلوم', link: 'https://example.com/science' },
-    ],
-    'الصف الثاني متوسط': [
-        { title: 'مادة اللغة العربية', link: 'https://example.com/arabic' },
-        { title: 'مادة اللغة الإنجليزية', link: 'https://example.com/english' },
-    ]
-};
+const materials = []; // مصفوفة لتخزين الملازم
 
-function showMaterials(grade) {
-    const materialsSection = document.getElementById('materials');
-    materialsSection.innerHTML = '';
-    const materials = materialsData[grade] || [];
-    materials.forEach(material => {
+function showSection(sectionId) {
+    const sections = document.querySelectorAll('.main-content section');
+    sections.forEach(section => {
+        section.style.display = 'none'; // إخفاء جميع الأقسام
+    });
+    document.getElementById(sectionId).style.display = 'block'; // إظهار القسم المحدد
+}
+
+function addMaterial() {
+    const title = document.getElementById('material-title').value;
+    const link = document.getElementById('material-link').value;
+
+    if (title && link) {
+        materials.push({ title, link });
+        alert('تم إضافة المادة بنجاح!');
+        document.getElementById('material-title').value = ''; // مسح الحقول بعد الإضافة
+        document.getElementById('material-link').value = '';
+        showMaterials();
+    } else {
+        alert('يرجى ملء جميع الحقول!');
+    }
+}
+
+function showMaterials() {
+    const materialsList = document.getElementById('materials-list');
+    materialsList.innerHTML = ''; // مسح القائمة الحالية
+    materials.forEach((material, index) => {
         const materialDiv = document.createElement('div');
-        materialDiv.className = 'material';
-        materialDiv.innerHTML = `<h3>${material.title}</h3><a href="${material.link}" target="_blank">تحميل</a>`;
-        materialsSection.appendChild(materialDiv);
+        materialDiv.innerHTML = `<p>${material.title} <a href="${material.link}" target="_blank">تحميل</a> <button onclick="deleteMaterial(${index})">حذف</button></p>`;
+        materialsList.appendChild(materialDiv);
     });
 }
 
-// وظيفة البحث
-document.getElementById('search').addEventListener('input', function() {
-    const query = this.value.toLowerCase();
-    const materialsSection = document.getElementById('materials');
-    materialsSection.innerHTML = '';
-    
-    for (const grade in materialsData) {
-        const filteredMaterials = materialsData[grade].filter(material => 
-            material.title.toLowerCase().includes(query)
-        );
-        filteredMaterials.forEach(material => {
-            const materialDiv = document.createElement('div');
-            materialDiv.className = 'material';
-            materialDiv.innerHTML = `<h3>${material.title} (${grade})</h3><a href="${material.link}" target="_blank">تحميل</a>`;
-            materialsSection.appendChild(materialDiv);
-        });
-    }
-});
+function deleteMaterial(index) {
+    materials.splice(index, 1); // حذف المادة من المصفوفة
+    showMaterials(); // تحديث قائمة الملازم
+}
+
+function logout() {
+    alert('تم تسجيل الخروج!');
+    // يمكنك إضافة منطق تسجيل الخروج هنا
+}
